@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Dodum&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Gowun+Dodum&family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap");
 
 :root {
   color-scheme: light;
@@ -127,10 +127,14 @@ p {
 h1 {
   margin: 15px 0 11px;
   color: #25392e;
-  font-family: "Gowun Dodum", sans-serif;
-  font-size: clamp(29px, 4vw, 39px);
-  font-weight: 400;
-  letter-spacing: -0.065em;
+  font-family: "Noto Sans KR", "Gowun Dodum", sans-serif;
+  font-size: clamp(29px, 4vw, 41px);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+
+.title-brand {
+  color: var(--green);
 }
 
 .hero-description {
