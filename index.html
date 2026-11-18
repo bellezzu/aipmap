@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="출발지와 도착지를 검색하고 자동차 이동 거리를 확인해 보세요."
+    />
+    <meta name="theme-color" content="#f5f7f2" />
+    <title>어디까지 갈까? — 거리 측정</title>
+    <link rel="preconnect" href="https://nominatim.openstreetmap.org" />
+    <link rel="preconnect" href="https://router.project-osrm.org" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="어디까지 갈까? 홈">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          <span>어디까지 갈까?</span>
+        </a>
+        <span class="topbar-note">장소 사이의 거리를 찾아보세요</span>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span aria-hidden="true">✳</span> YOUR NEXT WAY</p>
+          <h1 id="page-title">어디까지 가볼까요?</h1>
+          <p class="hero-description">
+            장소를 검색하고, 두 지점 사이의 자동차 이동 거리를 확인해 보세요.
+          </p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <span class="art-sun"></span>
+          <span class="art-hill art-hill-back"></span>
+          <span class="art-hill art-hill-front"></span>
+          <span class="art-route"><i></i><i></i><i></i></span>
+          <span class="art-pin art-pin-start">A</span>
+          <span class="art-pin art-pin-end">B</span>
+        </div>
+      </section>
+
+      <section class="planner" aria-label="거리 측정">
+        <div class="planner-heading">
+          <div>
+            <p class="section-kicker">PLAN YOUR ROUTE</p>
+            <h2>어디에서 어디까지?</h2>
+          </div>
+          <span class="car-icon" aria-hidden="true">🚙</span>
+        </div>
+
+        <form id="route-form" novalidate>
+          <div class="location-fields">
+            <div class="location-field" data-field="origin">
+              <label for="origin-input">
+                <span class="field-dot origin-dot" aria-hidden="true"></span>
+                출발지
+              </label>
+              <div class="input-row">
+                <input
+                  id="origin-input"
+                  name="origin"
+                  type="search"
+                  placeholder="예: 서울역"
+                  autocomplete="off"
+                  aria-describedby="origin-help"
+                />
+                <button class="search-button" type="button" data-search="origin">
+                  검색
+                </button>
+              </div>
+              <p class="field-help" id="origin-help">장소 이름이나 주소를 입력하세요</p>
+              <div class="results" id="origin-results" aria-live="polite"></div>
+              <p class="selected-place" id="origin-selected"></p>
+            </div>
+
+            <button
+              class="swap-button"
+              id="swap-button"
+              type="button"
+              aria-label="출발지와 도착지 바꾸기"
+              title="출발지와 도착지 바꾸기"
+            >
+              ⇅
+            </button>
+
+            <div class="location-field" data-field="destination">
+              <label for="destination-input">
+                <span class="field-dot destination-dot" aria-hidden="true"></span>
+                도착지
+              </label>
+              <div class="input-row">
+                <input
+                  id="destination-input"
+                  name="destination"
+                  type="search"
+                  placeholder="예: 부산역"
+                  autocomplete="off"
+                  aria-describedby="destination-help"
+                />
+                <button
+                  class="search-button"
+                  type="button"
+                  data-search="destination"
+                >
+                  검색
+                </button>
+              </div>
+              <p class="field-help" id="destination-help">
+                장소 이름이나 주소를 입력하세요
+              </p>
+              <div class="results" id="destination-results" aria-live="polite"></div>
+              <p class="selected-place" id="destination-selected"></p>
+            </div>
+          </div>
+
+          <button class="measure-button" id="measure-button" type="submit">
+            <span aria-hidden="true">⌁</span>
+            <span class="measure-label">거리 확인하기</span>
+          </button>
+        </form>
+
+        <div class="result-panel" id="route-result" aria-live="polite" hidden>
+          <div class="result-topline">
+            <span class="result-icon" aria-hidden="true">↗</span>
+            <span>자동차 이동 거리</span>
+          </div>
+          <p class="distance" id="distance-value"></p>
+          <p class="route-summary" id="route-summary"></p>
+          <a
+            class="map-link"
+            id="map-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            지도에서 보기 <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <p class="status-message" id="status-message" role="status"></p>
+      </section>
+
+      <footer class="page-footer">
+        <span>지도 데이터 © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> 기여자</span>
+        <span>경로: OSRM · 자동차 기준</span>
+      </footer>
+    </main>
+  </body>
+</html>
